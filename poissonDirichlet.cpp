@@ -7,8 +7,9 @@
 
 using namespace std;
 
+//compile: g++ -std=c++14 poissonDirichlet.cpp -o solver_dirichlet
 
-// Thanks for an answer here
+// Thanks for an answer here, I am using this timer
 //http://stackoverflow.com/questions/728068/how-to-calculate-a-time-difference-in-c
 class Timer
 {
@@ -113,6 +114,7 @@ void getSolutionDirichlet(double **mesh, int n, function<double(double, double)>
 
 void writeDataToFile(string filename, double **mesh, int n){
   ofstream file(filename, ios::out|ios::binary);
+  file.write((char *) &n, sizeof(int));
   for (int i = 0; i < n; i++) file.write((char *) mesh[i], n*sizeof(double));
   cout << "File size: " << file.tellp() << " bytes" << endl;
   file.close();
